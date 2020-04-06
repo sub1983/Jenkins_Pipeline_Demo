@@ -17,15 +17,13 @@ pipeline {
                 }
             }
         }
-        stage("build & SonarQube analysis") {
-            
-            agent any
-            steps {
-              withSonarQubeEnv('jenkinsonar') {
-                sh 'mvn clean package sonar:sonar'
-              }
-            }
-          }
+          
+       stage('SonarQube analysis') {
+        def scannerHome = tool 'SonarScanner 4.3.0';
+        withSonarQubeEnv('jenkinsonar') { // If you have configured more than one global server connection, you can specify its name
+        sh "${scannerHome}/bin/sonar-scanner"
+    }
+  }
           
         stage ('Install Stage') {
             steps {
