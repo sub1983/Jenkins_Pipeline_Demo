@@ -5,7 +5,7 @@ pipeline {
 
             steps {
                 withMaven(maven : 'apache-maven-3.6.0') {
-                    sh 'sudo mvn clean compile'
+                    sh ' mvn clean compile'
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
              }
              steps {
                 withSonarQubeEnv('jenkinsonar') { 
-                sh 'sudo mvn clean package sonar:sonar'
+                sh 'mvn clean package sonar:sonar'
              }
             }
            }
