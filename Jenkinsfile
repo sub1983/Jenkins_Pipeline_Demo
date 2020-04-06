@@ -37,7 +37,7 @@ pipeline {
                 sh 'mvn clean package sonar:sonar'
              }
             }
-    
+         }
           stage ('Artifactory configuration') {
             steps {
                 rtServer (
@@ -72,4 +72,4 @@ pipeline {
         }
          }
 }
-}
+
