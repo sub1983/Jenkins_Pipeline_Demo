@@ -28,12 +28,12 @@ pipeline {
             }
         }
           
-          stage ('SonarQube analysis') {
+         stage ('SonarQube analysis') {
             def scannerHome = tool 'SonarScanner 4.3.0';
-            withSonarQubeEnv('jenkinsonar') { // If you have configured more than one global server connection, you can specify its name
+            withSonarQubeEnv('jenkinsonar') { 
             sh "${scannerHome}/bin/sonar-scanner"
-    }
-  }
-    }
+             }
+            }
+           }
     
 }
