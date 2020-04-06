@@ -62,7 +62,7 @@ pipeline {
           stage ('Exec Maven') {
             steps {
                 rtMavenRun (
-                    tool: apache-maven-3.6.0, // Tool name from Jenkins configuration
+                    tool: 'apache-maven-3.6.0', // Tool name from Jenkins configuration
                     pom: 'pom.xml',
                     goals: 'clean install',
                     deployerId: "MAVEN_DEPLOYER",
