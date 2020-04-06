@@ -53,9 +53,20 @@ pipeline {
 
                 rtMavenResolver (
                     id: "MAVEN_RESOLVER",
-                    serverId: "ARTIFACTORY_SERVER",
-                    releaseRepo: "libs-release",
-                    snapshotRepo: "libs-snapshot"
+                    serverId: "jenkinsartifact",
+                    releaseRepo: "jenkins-release",
+                    snapshotRepo: "jenkins-snapshot"
+                )
+            }
+        }
+          stage ('Exec Maven') {
+            steps {
+                rtMavenRun (
+                    tool: apache-maven-3.6.0, // Tool name from Jenkins configuration
+                    pom: 'pom.xml',
+                    goals: 'clean install',
+                    deployerId: "MAVEN_DEPLOYER",
+                    resolverId: "MAVEN_RESOLVER"
                 )
             }
         }
