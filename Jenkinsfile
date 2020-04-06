@@ -34,7 +34,7 @@ pipeline {
              }
              steps {
                 withSonarQubeEnv('jenkinsonar') { 
-                sh "${scannerHome}/bin/sonar-scanner"
+                sh 'mvn clean package sonar:sonar'
              }
             }
            }
