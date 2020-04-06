@@ -34,7 +34,7 @@ pipeline {
              }
              steps {
                 withSonarQubeEnv('jenkinsonar') { 
-                sh 'mvn clean package sonar:sonar'
+                sh 'sudo mvn clean package sonar:sonar'
              }
             }
            }
