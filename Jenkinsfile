@@ -38,5 +38,26 @@ pipeline {
              }
             }
            }
+          stage ('Artifactory configuration') {
+            steps {
+                rtServer (
+                    id: "jenkinsartifact"
+                )
+
+                rtMavenDeployer (
+                    id: "MAVEN_DEPLOYER",
+                    serverId: "jenkinsartifact",
+                    releaseRepo: "libs-release-local",
+                    snapshotRepo: "libs-snapshot-local"
+                )
+
+                rtMavenResolver (
+                    id: "MAVEN_RESOLVER",
+                    serverId: "ARTIFACTORY_SERVER",
+                    releaseRepo: "libs-release",
+                    snapshotRepo: "libs-snapshot"
+                )
+            }
+        }
          }
 }
