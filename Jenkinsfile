@@ -38,38 +38,15 @@ pipeline {
              }
             }
          }
-          stage ('Artifactory configuration') {
+          stage ('Push to Artifactory') {
+
             steps {
-                rtServer (
-                    id: "jenkinsartifact"
-                )
-
-                rtMavenDeployer (
-                    id: "jenkinsartifact",
-                    serverId: "jenkinsartifact",
-                    releaseRepo: "jenkins-release",
-                    snapshotRepo: "jenkins-snapshots"
-                )
-
-                rtMavenResolver (
-                    id: "jenkinsartifact",
-                    serverId: "jenkinsartifact",
-                    releaseRepo: "jenkins-release",
-                    snapshotRepo: "jenkins-snapshots"
-                )
+                withMaven(maven : 'apache-maven-3.6.0') {
+                    sh 'mvn deploy'
+                }
             }
         }
-          stage ('Exec Maven') {
-            steps {
-                rtMavenRun (
-                    tool: 'apache-maven-3.6.0', // Tool name from Jenkins configuration
-                    pom: 'pom.xml',
-                    goals: 'clean install',
-                    deployerId: "jenkinsartifact",
-                    resolverId: "jenkinsartifact"
-                )
-            }
-        }
+          
          }
 }
 
