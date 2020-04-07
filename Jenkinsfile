@@ -45,17 +45,17 @@ pipeline {
                 )
 
                 rtMavenDeployer (
-                    id: "MAVEN_DEPLOYER",
+                    id: "jenkinsartifact",
                     serverId: "jenkinsartifact",
-                    releaseRepo: "libs-release-local",
-                    snapshotRepo: "libs-snapshot-local"
+                    releaseRepo: "jenkins-release",
+                    snapshotRepo: "jenkins-snapshots"
                 )
 
                 rtMavenResolver (
-                    id: "MAVEN_RESOLVER",
+                    id: "jenkinsartifact",
                     serverId: "jenkinsartifact",
                     releaseRepo: "jenkins-release",
-                    snapshotRepo: "jenkins-snapshot"
+                    snapshotRepo: "jenkins-snapshots"
                 )
             }
         }
@@ -65,8 +65,8 @@ pipeline {
                     tool: 'apache-maven-3.6.0', // Tool name from Jenkins configuration
                     pom: 'pom.xml',
                     goals: 'clean install',
-                    deployerId: "MAVEN_DEPLOYER",
-                    resolverId: "MAVEN_RESOLVER"
+                    deployerId: "jenkinsartifact",
+                    resolverId: "jenkinsartifact"
                 )
             }
         }
