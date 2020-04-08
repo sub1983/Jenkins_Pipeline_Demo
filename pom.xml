@@ -20,13 +20,13 @@
 <repository>
 <id>central</id>
 <name>jenkins-releases</name>
-<url>http://18.237.89.12:8081/artifactory/jenkins-release</url>
+<url>http://54.185.4.180:8081/artifactory/jenkins-release</url>
 </repository>
 
 <snapshotRepository>
 <id>snapshots</id>
 <name>jenkins-snapshots</name>
-<url>http://18.237.89.12:8081/artifactory/jenkins-snapshots</url>
+<url>http://54.185.4.180:8081/artifactory/jenkins-snapshots</url>
 </snapshotRepository>
 </distributionManagement>
 <repositories>
