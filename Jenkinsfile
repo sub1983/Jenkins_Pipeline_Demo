@@ -83,6 +83,8 @@ pipeline {
             }
             steps {
                 echo "Success :)"
+                  slackSend (channel: '#deploy',color: '#FFFF00', message: "BUILD SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+
                  }
              }   
          }
