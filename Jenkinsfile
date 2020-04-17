@@ -6,7 +6,9 @@ def getBuildUser() {
     return currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
 }
 pipeline {
-   
+     environment {
+        BUILD_USER = ''
+    }
 
     agent any
       stages {
