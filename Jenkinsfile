@@ -19,7 +19,6 @@ pipeline {
             steps {
                 withMaven(maven : 'apache-maven-3.6.0') {
                     sh ' mvn clean compile'
-                    slackSend (channel: '#deploy',color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
                 }
             }
         }
