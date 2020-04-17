@@ -17,6 +17,7 @@ pipeline {
         stage ('Compile Stage') {
 
             steps {
+                slackSend (channel: '#deploy',color: '#FFFF00', message: "COMPILE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
                 withMaven(maven : 'apache-maven-3.6.0') {
                     sh ' mvn clean compile'
                 }
@@ -81,18 +82,6 @@ pipeline {
                  }
              }   
          }
- post {
-        always {
-            script {
-                BUILD_USER = getBuildUser()
-            }
-            echo 'I will always say Hello again!'
-            
-            slackSend channel: '#deploy',
-                color: COLOR_MAP[currentBuild.currentResult],
-                message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} by ${BUILD_USER}\n More info at: ${env.BUILD_URL}"
-            
-        }
-    }
+
 }
 
