@@ -9,7 +9,7 @@ pipeline {
     environment {
         //This variable need be tested as string
         doError = '0'
-        BUILD_USER = ''
+        BUILD_USER = 'deploy'
     }
 
     agent any
@@ -86,9 +86,7 @@ pipeline {
             script {
                 BUILD_USER = getBuildUser()
             }
-            {
-                cleanWs()
-            }
+          
             echo 'I will always say hello in the console.'
             slackSend channel: '#deploy',
                 color: COLOR_MAP[currentBuild.currentResult],
