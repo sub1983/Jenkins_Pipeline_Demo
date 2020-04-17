@@ -8,6 +8,8 @@ def getBuildUser() {
 pipeline {
      environment {
         BUILD_USER = ''
+        doError = '1'
+
     }
 
     agent any
@@ -83,6 +85,9 @@ pipeline {
         always {
             script {
                 BUILD_USER = getBuildUser()
+            }
+            {
+                cleanWs()
             }
             echo 'I will always say hello in the console.'
             slackSend channel: '#deploy',
