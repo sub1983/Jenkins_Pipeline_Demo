@@ -6,10 +6,10 @@ def getBuildUser() {
     return currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
 }
 pipeline {
-     environment {
-        BUILD_USER = ''
+    environment {
+        //This variable need be tested as string
         doError = '1'
-
+        BUILD_USER = ''
     }
 
     agent any
