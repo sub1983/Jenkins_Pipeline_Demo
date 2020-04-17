@@ -17,7 +17,7 @@ pipeline {
         stage ('Compile Stage') {
 
             steps {
-                slackSend (channel: '#deploy',color: '#FFFF00', message: "COMPILE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+                slackSend (channel: '#deploy',color: '#FFFF00', message: "COMPILING: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
                 withMaven(maven : 'apache-maven-3.6.0') {
                     sh ' mvn clean compile'
                 }
@@ -26,6 +26,7 @@ pipeline {
         stage ('Testing Stage') {
 
             steps {
+                slackSend (channel: '#deploy',color: '#FFFF00', message: "TESTING: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
                 withMaven(maven : 'apache-maven-3.6.0') {
                     sh 'mvn test'
                 }
@@ -41,6 +42,7 @@ pipeline {
              def scannerHome = tool 'sonarscanner'
              }
              steps {
+                slackSend (channel: '#deploy',color: '#FFFF00', message: "CODE ANALYSIS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
                 withSonarQubeEnv('jenkinsonar') { 
                 sh 'mvn clean package sonar:sonar'
              }
@@ -48,6 +50,7 @@ pipeline {
          }
           stage ('Building stage') {
             steps {
+                 slackSend (channel: '#deploy',color: '#FFFF00', message: "BUILDING: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
                 withMaven(maven : 'apache-maven-3.6.0') {
                     sh 'mvn install'
                 }
@@ -57,6 +60,7 @@ pipeline {
           stage ('Push to Artifactory') {
 
             steps {
+                   slackSend (channel: '#deploy',color: '#FFFF00', message: "PUSHED to JFROG: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
                 withMaven(maven : 'apache-maven-3.6.0') {
                     sh 'mvn deploy'
                 }
