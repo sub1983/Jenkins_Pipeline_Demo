@@ -6,11 +6,7 @@ def getBuildUser() {
     return currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
 }
 pipeline {
-      environment {
-        // test variable: 0=success, 1=fail; must be string
-        doError = '0'
-        BUILD_USER = 'jenkinsuser'
-    }
+   
 
     agent any
       stages {
