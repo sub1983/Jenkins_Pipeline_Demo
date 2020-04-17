@@ -81,16 +81,17 @@ pipeline {
             }
         }   
          }
-    post {
+   post {
         always {
             script {
                 BUILD_USER = getBuildUser()
             }
-          
-            echo 'I will always say hello in the console.'
+            echo 'I will always say Hello again!'
+            
             slackSend channel: '#deploy',
                 color: COLOR_MAP[currentBuild.currentResult],
                 message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} by ${BUILD_USER}\n More info at: ${env.BUILD_URL}"
+            
         }
     }
 }
