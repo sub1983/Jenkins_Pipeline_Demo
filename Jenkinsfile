@@ -9,7 +9,7 @@ pipeline {
     environment {
         //This variable need be tested as string
         doError = '0'
-        BUILD_USER = 'deploy'
+        BUILD_USER = ''
     }
 
     agent any
